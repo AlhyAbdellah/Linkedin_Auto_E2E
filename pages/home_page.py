@@ -9,7 +9,7 @@ from utils.helps import safe_send
 from utils.helps import safeclick_cleanup
 
 #Creation de class HomePgae && Initialization
-class HomePgae:
+class HomePage:
 
     def __init__(self,driver):
         self.driver = driver
