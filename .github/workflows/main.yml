@@ -34,6 +34,9 @@ jobs:
           echo "EMAIL=${{ secrets.LINKEDIN_EMAIL }}" > config/.env
           echo "PASSWORD=${{ secrets.LINKEDIN_PASSWORD }}" >> config/.env
 
+      - name: 🔧 Ajouter le dossier du projet au PYTHONPATH
+        run: echo "PYTHONPATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+
       - name: 🧪 Lancer les tests avec pytest
         run: pytest tests/base_test_linkedin.py --html=report_linkedin.html
 
