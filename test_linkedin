@@ -1,0 +1,52 @@
+name: LinkedIn E2E Tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  schedule:
+    - cron: '0 9 * * 1'  # chaque lundi à 09:00 UTC
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔽 Cloner le repo
+        uses: actions/checkout@v4
+
+      - name: 🔧 Configurer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: 📦 Installer les dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 📁 Créer dossier screenshots
+        run: mkdir -p screenshots
+
+      - name: 🔐 Ajouter les secrets depuis GitHub
+        run: |
+          echo "EMAIL=${{ secrets.LINKEDIN_EMAIL }}" >> config/.env
+          echo "PASSWORD=${{ secrets.LINKEDIN_PASSWORD }}" >> config/.env
+
+      - name: 🧪 Lancer les tests avec Pytest + HTML
+        run: pytest tests/base_test_linkedin.py --html=report_linkedin.html
+
+      - name: 📎 Sauvegarder le rapport HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-html
+          path: report_linkedin.html
+
+      - name: 📷 Sauvegarder les captures d'écran
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots/

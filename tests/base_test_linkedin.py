@@ -3,13 +3,14 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import os
 import time
-
+from dotenv import load_dotenv
 from pages.home_page import HomePage
 from pages.login_page import Loginpage
 from pages.acceuil_page import AcceuiPage
 from pages.profil_page import Profil
 from pages.message_page import Message
 from pages.logout_page import Logout
+
 
 # ---------------------------- FIXTURE SETUP ---------------------------- #
 @pytest.fixture(scope="function")
