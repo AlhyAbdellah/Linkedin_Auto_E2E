@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pages.login_page import Email, Password
+from config.config import Email, Password
 from utils.helps import wait_random
 from utils.helps import move_mouse
 from utils.helps import safe_send
