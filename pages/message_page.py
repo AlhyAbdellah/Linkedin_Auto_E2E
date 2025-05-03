@@ -21,7 +21,7 @@ class Message:
         wait_random(0.1, 2)
         message = self.wait.until(EC.presence_of_element_located(self.champ_message))
         move_mouse(self.driver,message)
-        safe_send(self.champ_message,"Hbiba dyali, Tanmout Fik - Message Automatisé -")
+        safe_send(message,"Hbiba dyali, Tanmout Fik - Message Automatisé -")
         print("message rédigé via linkedin")
 
         wait_random(0.1, 2)
