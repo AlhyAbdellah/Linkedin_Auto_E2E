@@ -23,13 +23,13 @@ class Loginpage:
         wait_random(0.5, 1.1)
         email_field = self.wait.until(EC.presence_of_element_located(self.user_name))
         move_mouse(self.driver,email_field)
-        safe_send(self.driver,self. user_name,Email)
+        safe_send(email_field,Email)
         print("email correct")
 
         wait_random(0.5, 1.1)
         password_field = self.wait.until(EC.presence_of_element_located(self.key_word))
         move_mouse(self.driver,password_field)
-        safe_send(self.driver,self.key_word,Password)
+        safe_send(password_field,Password)
         print("password correct")
         print("infos bien remplis")
     
