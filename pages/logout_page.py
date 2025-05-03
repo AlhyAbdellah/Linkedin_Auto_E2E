@@ -21,10 +21,15 @@ class Logout:
 
 
     def logout(self,element):
-        move_mouse(0.1,1.)
-        safeclick_cleanup(self.driver, self.profil_menu)
         wait_random(0.5, 1.1)
-        move_mouse(0.1,1.)
+        profil = self.wait.until(EC.presence_of_element_located(self.profil_menu))
+        move_mouse(self.driver,profil)
+        safeclick_cleanup(self.driver, self.profil_menu)
+        print("menu selectionné")
+
+        wait_random(0.5, 1.1)
+        logout = self.wait.until(EC.presence_of_element_located(self.logout_btn))
+        move_mouse(self.driver,logout)
         safeclick_cleanup(self.driver, self.logout_btn)
         print("🚪 Déconnexion réussie")
 

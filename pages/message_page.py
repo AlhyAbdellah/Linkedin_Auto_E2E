@@ -18,8 +18,15 @@ class Message:
     envoyer=(By.CSS_SELECTOR,".msg-form__send-button.artdeco-button.artdeco-button--1")
 
     def fill_message_send(self,value):
-        move_mouse(self.driver,self.champ_message)
-        safe_send(self.champ_message,"Hbiba dyali, Tanmout Fik")
-        move_mouse(self.driver,self.envoyer)
+        wait_random(0.1, 2)
+        message = self.wait.until(EC.presence_of_element_located(self.champ_message))
+        move_mouse(self.driver,message)
+        safe_send(self.champ_message,"Hbiba dyali, Tanmout Fik - Message Automatisé -")
+        print("message rédigé via linkedin")
+
+        wait_random(0.1, 2)
+        eny=self.wait.until(EC.presence_of_element_located(self.envoyer))
+        move_mouse(self.driver,eny)
         safeclick_cleanup(self.driver,self.envoyer)
-        wait_random(0.1,2)
+        print("message envoyé via linkedin")
+        wait_random(0.1, 2)

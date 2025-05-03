@@ -20,20 +20,24 @@ class Loginpage:
 
     #full login information
     def full_email_key_work(self):
-        wait_random(0.5,1.1)
-        move_mouse(self.driver,self.user_name)
-        safe_send(self.driver,self.user_name,Email)
+        wait_random(0.5, 1.1)
+        email_field = self.wait.until(EC.presence_of_element_located(self.user_name))
+        move_mouse(self.driver,email_field)
+        safe_send(self.driver,self. user_name,Email)
         print("email correct")
-        wait_random(0.5,1.1)
-        move_mouse(self.driver,self.key_word)
+
+        wait_random(0.5, 1.1)
+        password_field = self.wait.until(EC.presence_of_element_located(self.key_word))
+        move_mouse(self.driver,password_field)
         safe_send(self.driver,self.key_word,Password)
         print("password correct")
         print("infos bien remplis")
     
 
     def signin_button_click(self):
-        wait_random(0.5,1.1)
-        move_mouse(self.driver,self.signin_boutton)
+        wait_random(0.5, 1.1)
+        signin = self.wait.until(EC.presence_of_element_located(self.signin_boutton))
+        move_mouse(self.driver,signin)
         safeclick_cleanup(self.driver,self.signin_boutton)
         print ("passe au page d'acceuil sucessfuly")
     
