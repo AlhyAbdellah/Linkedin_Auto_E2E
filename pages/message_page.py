@@ -22,12 +22,15 @@ class Message:
             wait_random(0.1, 2)
             message = self.wait.until(EC.presence_of_element_located(self.champ_message))
             move_mouse(self.driver, message)
+            print("Contenu saisi dans le champ de message :", value)
             safe_send(message, value)
+            self.driver.save_screenshot("debug_message_rempli.png")
             print("✅ Message rédigé via LinkedIn")
 
             wait_random(0.1, 2)
             eny = self.wait.until(EC.presence_of_element_located(self.envoyer))
             move_mouse(self.driver, eny)
+            self.driver.save_screenshot("avant_click_envoyer.png")
             safeclick_cleanup(self.driver, self.envoyer)
             print("✅ Message envoyé via LinkedIn")
 
