@@ -17,8 +17,13 @@ class Profil:
     message_bouton=(By.CLASS_NAME,"artdeco-button__text")
 
     def visibility_click(self):
-        wait_random(0.1, 2)
-        element = self.wait.until(EC.presence_of_element_located(self.message_bouton))
-        move_mouse(self.driver, element)
-        safeclick_cleanup(self.driver,self.message_bouton)
-        print("✅ Bouton Message cliqué avec succès")
+        wait_random(0.5, 1.5)
+        try:
+            element = self.wait.until(EC.element_to_be_clickable(self.message_bouton))
+            move_mouse(self.driver, element)
+            safeclick_cleanup(self.driver, element)
+            print("✅ Bouton Message cliqué avec succès")
+        except TimeoutException:
+            print("❌ Échec : bouton message introuvable ou non cliquable.")
+        except Exception as e:
+            print("❌ Erreur inattendue dans visibility_click :", e)
