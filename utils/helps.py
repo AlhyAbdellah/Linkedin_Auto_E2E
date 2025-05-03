@@ -70,7 +70,6 @@ def search_and_select(driver, search_input_locator, keyword, result_selector, ta
     results = WebDriverWait(driver, 5).until(
         EC.presence_of_all_elements_located((By.CSS_SELECTOR, result_selector))
     )
-
     print("Résultats récupérés :")
     for item in results:
         print("-", item.text.strip())
