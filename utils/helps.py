@@ -12,7 +12,7 @@ def safe_send(element,value):
     element.send_keys(value)
 
 #WaitRandom
-def wait_random(min_sec,max_sec):
+def wait_random(min_sec, max_sec):
     time.sleep(random.uniform(min_sec,max_sec))
 
 #safeclick_cleanup # Clic avancé : gère iframe, scroll, overlay, JS click
@@ -23,7 +23,7 @@ def safeclick_cleanup(driver,element):
 
         #scroll vers l'element
         driver.execute_script("arguments[0].scrollIntoView({behavior:'smooth', block:'center'});",element)
-        wait_random(0.4,1.1)
+        wait_random(0.4, 1.1)
 
         #check element to be clickable
         WebDriverWait(driver,10).until(EC.element_to_be_clickable(element))
