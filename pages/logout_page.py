@@ -13,19 +13,22 @@ class Logout:
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
-        
-    profil_menu = (By.XPATH, "//span[contains(text(), 'Vous')]")
+
+    profil_menu = (By.CSS_SELECTOR, "img.global-nav__me-photo")  # l'avatar
     logout_btn = (By.XPATH, "//button[contains(., 'Déconnexion')]")
 
-    def logout(self):  # ⬅️ Supprimé "element"
-        wait_random(0.5, 1.1)
-        profil = self.wait.until(EC.presence_of_element_located(self.profil_menu))
-        move_mouse(self.driver, profil)
-        safeclick_cleanup(self.driver, self.profil_menu)
-        print("menu sélectionné")
+    def logout(self):
+        try:
+            wait_random(0.5, 1.1)
+            profil = self.wait.until(EC.presence_of_element_located(self.profil_menu))
+            move_mouse(self.driver, profil)
+            safeclick_cleanup(self.driver, self.profil_menu)
+            print("menu sélectionné")
 
-        wait_random(0.5, 1.1)
-        logout = self.wait.until(EC.presence_of_element_located(self.logout_btn))
-        move_mouse(self.driver, logout)
-        safeclick_cleanup(self.driver, self.logout_btn)
-        print("🚪 Déconnexion réussie")
+            wait_random(0.5, 1.1)
+            logout = self.wait.until(EC.presence_of_element_located(self.logout_btn))
+            move_mouse(self.driver, logout)
+            safeclick_cleanup(self.driver, self.logout_btn)
+            print("🚪 Déconnexion réussie")
+        except TimeoutException:
+            print("❌ Déconnexion impossible : le menu utilisateur n'a pas été trouvé.")
