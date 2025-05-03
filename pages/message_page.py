@@ -18,23 +18,23 @@ class Message:
     envoyer=(By.CSS_SELECTOR,".msg-form__send-button.artdeco-button.artdeco-button--1")
 
     def fill_message_send(self, value):
-    try:
-        wait_random(0.1, 2)
-        message = self.wait.until(EC.presence_of_element_located(self.champ_message))
-        move_mouse(self.driver, message)
-        safe_send(message, value)
-        print("✅ Message rédigé via LinkedIn")
+        try:
+            wait_random(0.1, 2)
+            message = self.wait.until(EC.presence_of_element_located(self.champ_message))
+            move_mouse(self.driver, message)
+            safe_send(message, value)
+            print("✅ Message rédigé via LinkedIn")
 
-        wait_random(0.1, 2)
-        eny = self.wait.until(EC.presence_of_element_located(self.envoyer))
-        move_mouse(self.driver, eny)
-        safeclick_cleanup(self.driver, self.envoyer)
-        print("✅ Message envoyé via LinkedIn")
+            wait_random(0.1, 2)
+            eny = self.wait.until(EC.presence_of_element_located(self.envoyer))
+            move_mouse(self.driver, eny)
+            safeclick_cleanup(self.driver, self.envoyer)
+            print("✅ Message envoyé via LinkedIn")
 
-        wait_random(0.1, 2)
+            wait_random(0.1, 2)
 
-    except TimeoutException:
-        print("❌ Timeout : champ de message ou bouton envoyer non trouvé.")
-    except Exception as e:
-        print(f"❌ Erreur inattendue lors de l’envoi du message : {e}")
+        except TimeoutException:
+            print("❌ Timeout : champ de message ou bouton envoyer non trouvé.")
+        except Exception as e:
+            print(f"❌ Erreur inattendue lors de l’envoi du message : {e}")
 
