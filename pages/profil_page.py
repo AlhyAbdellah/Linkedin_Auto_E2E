@@ -4,7 +4,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from utils.helps import safeclick_cleanup
-
+from utils.helps import wait_random
+from utils.helps import move_mouse
 
 class Profil:
     def __init__(self,driver):
@@ -16,6 +17,5 @@ class Profil:
     message_bouton=(By.CLASS_NAME,"artdeco-button__text")
 
     def visibility_click(self,element):
-        element = self.wait.until(EC.visibility_of_element_located(self.message_bouton))
-        safeclick_cleanup(self.driver,element)
+        safeclick_cleanup(self.driver,self.message_bouton)
         print("✅ Bouton Message cliqué avec succès")
