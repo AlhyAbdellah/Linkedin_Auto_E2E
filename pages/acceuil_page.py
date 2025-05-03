@@ -20,7 +20,6 @@ class AcceuiPage:
 
     # Méthodes
     def rechercher_personne(self, mot_cle, nom_complet):
-        close_popup_if_present(self.driver)
         wait_random(0.5, 1.1)
         try:
             champ_recherche = self.wait.until(
