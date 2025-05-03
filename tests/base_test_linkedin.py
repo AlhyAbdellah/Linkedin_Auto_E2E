@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import os
 import time
+import random
 from dotenv import load_dotenv
 from pages.home_page import HomePage
 from pages.login_page import Loginpage
@@ -54,8 +55,9 @@ def test_linkedin_e2e(driver):
     assert message is not None
 
     logout = Logout(driver)
-    logout.se_deconnecter()
+    logout.logout()
     assert logout is not None
+
 
 # ---------------------------- PYTEST HTML HOOKS ---------------------------- #
 def pytest_configure(config):
