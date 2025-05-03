@@ -16,6 +16,9 @@ class Profil:
     #Locators
     message_bouton=(By.CLASS_NAME,"artdeco-button__text")
 
-    def visibility_click(self,element):
+    def visibility_click(self):
+        wait_random(0.1, 2)
+        element = self.wait.until(EC.presence_of_element_located(self.message_bouton))
+        move_mouse(self.driver, element)
         safeclick_cleanup(self.driver,self.message_bouton)
         print("✅ Bouton Message cliqué avec succès")
