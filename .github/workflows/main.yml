@@ -1,58 +1,53 @@
-name: LinkedIn E2E Test
+name: test
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-  schedule:
-    - cron: '0 9 * * 1'  # chaque lundi à 09:00 UTC
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🧾 Cloner le repo
+      - name: 🧱 Cloner le repo
         uses: actions/checkout@v4
 
-      - name: ⚙️ Installer Python
+      - name: 🐍 Installer Python
         uses: actions/setup-python@v5
         with:
           python-version: 3.11
+
+      - name: 📁 Créer le dossier screenshots
+        run: mkdir -p screenshots
 
       - name: 📦 Installer les dépendances
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 🛠️ Générer fichier .env à partir des secrets GitHub
+      - name: 🔐 Générer le fichier .env depuis les secrets GitHub
         run: |
           mkdir -p config
-          echo "EMAIL=${{ secrets.LINKEDIN_EMAIL }}" > config/.env
-          echo "PASSWORD=${{ secrets.LINKEDIN_PASSWORD }}" >> config/.env
+          echo "LINKEDIN_EMAIL=${{ secrets.LINKEDIN_EMAIL }}" > pages/.env
+          echo "LINKEDIN_PASSWORD=${{ secrets.LINKEDIN_PASSWORD }}" >> pages/.env
 
-      - name: 🔧 Ajouter le dossier du projet au PYTHONPATH
-        run: echo "PYTHONPATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+      - name: 🔧 Ajouter le projet au PYTHONPATH
+        run: echo "PYTHONPATH=${{ github.workspace }}" >> $GITHUB_ENV
 
-      - name: 🧪 Lancer les tests avec pytest
+      - name: 🚀 Lancer les tests avec Pytest
         run: pytest tests/base_test_linkedin.py --html=report_linkedin.html
 
-      - name: 📎 Sauvegarder le rapport HTML
-        uses: actions/upload-artifact@v4
-        with:
-          name: rapport-html
-          path: report_linkedin.html
-
-      - name: 📷 Sauvegarder les captures d'écran
+      - name: 📸 Upload des captures d'écran
         uses: actions/upload-artifact@v4
         with:
           name: screenshots
           path: screenshots/
-      - name: 📎 Upload screenshots
+          if-no-files-found: warn
+          compression-level: 6
+          overwrite: false
+          include-hidden-files: false
+
+      - name: 📝 Sauvegarder le rapport HTML
         uses: actions/upload-artifact@v4
         with:
-          name: linkedin_test_screenshots
-          path: screenshots/
+          name: rapport-html
+          path: report_linkedin.html

@@ -52,11 +52,13 @@ def test_linkedin_e2e(driver):
 
     message = Message(driver)
     message.fill_message_send("Hbiba dyali, Tanmout fik")
+    driver.save_screenshot("screenshots/message_envoye.png")
     assert message is not None
 
     logout = Logout(driver)
     logout.logout()
     assert logout is not None
+    driver.save_screenshot("screenshots/message_envoye.png")
 
 
 # ---------------------------- PYTEST HTML HOOKS ---------------------------- #
