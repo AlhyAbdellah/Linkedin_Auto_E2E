@@ -51,7 +51,7 @@ jobs:
         with:
           name: screenshots
           path: screenshots/
-        name: 📎 Upload screenshots
+      - name: 📎 Upload screenshots
         uses: actions/upload-artifact@v3
         with:
           name: linkedin_test_screenshots
