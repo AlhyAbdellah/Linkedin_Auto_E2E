@@ -7,6 +7,7 @@ from utils.helps import wait_random
 from utils.helps import move_mouse
 from utils.helps import safe_send
 from utils.helps import safeclick_cleanup
+import time
 
 class Loginpage:
     def __init__(self,driver):
@@ -20,28 +21,29 @@ class Loginpage:
 
     #full login information
     def full_email_key_work(self):
-        wait_random(0.5, 1.1)
-        email_field = self.wait.until(EC.presence_of_element_located(self.user_name))
-        move_mouse(self.driver, email_field)
-        safe_send(email_field, Email)
-        print("email correct")
+        email = os.getenv("LINKEDIN_EMAIL")
+        password = os.getenv("LINKEDIN_PASSWORD")
+        
+        email_input = self.wait.until(EC.presence_of_element_located(self.email_input))
+        email_input.send_keys(email)
+        print("📧 Email correct")
 
-        wait_random(0.5, 1.1)
-        password_field = self.wait.until(EC.presence_of_element_located(self.key_word))
-        move_mouse(self.driver, password_field)
-        safe_send(password_field, Password)
-        print("password correct")
-        print("infos bien remplis")
+        password_input = self.wait.until(EC.presence_of_element_located(self.password_input))
+        password_input.send_keys(password)
+        print("🔐 Password correct")
+
+        self.driver.save_screenshot("screenshots/fill_login.png")
+
 
 
     def signin_button_click(self):
-        wait_random(0.5, 1.1)
-        signin_btn = self.wait.until(EC.presence_of_element_located(self.signin_boutton))
-        move_mouse(self.driver, signin_btn)
-        safeclick_cleanup(self.driver, self.signin_boutton)
+        button = self.wait.until(EC.element_to_be_clickable(self.signin_boutton))
+        button.click()
+        print("✅ Click sur Sign in effectué")
+        time.sleep(3)
+        print("🔗 URL après login:", self.driver.current_url)
         self.driver.save_screenshot("screenshots/after_login.png")
-        print("URL actuelle après login :", self.driver.current_url)
-        print("✅ Passe à la page d'accueil avec succès")
+
 
     
 
