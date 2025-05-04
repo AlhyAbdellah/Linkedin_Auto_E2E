@@ -52,7 +52,7 @@ jobs:
           name: screenshots
           path: screenshots/
       - name: 📎 Upload screenshots
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: linkedin_test_screenshots
           path: screenshots/
