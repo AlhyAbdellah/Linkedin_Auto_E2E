@@ -1,4 +1,5 @@
 from selenium import webdriver
+import os
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -24,7 +25,9 @@ class Message:
             move_mouse(self.driver, message)
             print("Contenu saisi dans le champ de message :", value)
             safe_send(message, value)
-            self.driver.save_screenshot("debug_message_rempli.png")
+            os.makedirs("screenshots", exist_ok=True)
+            self.driver.save_screenshot("screenshots/debug_message_rempli.png")
+            self.driver.save_screenshot("screenshots/avant_click_envoyer.png")
             print("✅ Message rédigé via LinkedIn")
 
             wait_random(0.1, 2)
