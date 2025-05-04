@@ -25,11 +25,11 @@ class Loginpage:
         email = os.getenv("LINKEDIN_EMAIL")
         password = os.getenv("LINKEDIN_PASSWORD")
         
-        email_input = self.wait.until(EC.presence_of_element_located(self.email_input))
+        email_input = self.wait.until(EC.presence_of_element_located(self.user_name))
         email_input.send_keys(email)
         print("📧 Email correct")
 
-        password_input = self.wait.until(EC.presence_of_element_located(self.password_input))
+        password_input = self.wait.until(EC.presence_of_element_located(self.key_word))
         password_input.send_keys(password)
         print("🔐 Password correct")
 
