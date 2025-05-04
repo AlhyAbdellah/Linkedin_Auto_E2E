@@ -39,6 +39,8 @@ class Loginpage:
         signin_btn = self.wait.until(EC.presence_of_element_located(self.signin_boutton))
         move_mouse(self.driver, signin_btn)
         safeclick_cleanup(self.driver, self.signin_boutton)
+        self.driver.save_screenshot("screenshots/after_login.png")
+        print("URL actuelle après login :", self.driver.current_url)
         print("✅ Passe à la page d'accueil avec succès")
 
     
